@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { LessonModule } from './lesson/lesson.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Lesson } from './lesson/lesson.entity';
+import { LessionService } from './lession/lession.service';
 
 @Module({
   imports: [
@@ -22,5 +23,6 @@ import { Lesson } from './lesson/lesson.entity';
     }),
     LessonModule,
   ],
+  providers: [LessionService],
 })
 export class AppModule {}
