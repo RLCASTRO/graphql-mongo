@@ -5,17 +5,14 @@ import { LessonService } from './lesson.service';
 @Resolver((of) => LessonType)
 export class LessonResolver {
   constructor(private lessonService: LessonService) {}
-  @Query((returns) => LessonType)
-  lesson() {
-    return {
-      id: 'adasdfadf',
-      name: 'Physics Class',
-      startDate: new Date().toISOString(),
-      endDate: new Date().toISOString(),
-    };
+    @Query(returns => LessonType)
+  lesson(
+    @Args('id') id: string,
+  ) {
+    return this.lessonService.getLesson(id);
   }
 
-  @Mutation(returns => LessonType)
+  @Mutation((returns) => LessonType)
   createLesson(
     @Args('name') name: string,
     @Args('startDate') startDate: string,
