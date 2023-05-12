@@ -21,6 +21,5 @@ import { LessonService } from './lesson/lesson.service';
     }),
     LessonModule,
   ],
-  providers: [LessonService],
 })
 export class AppModule {}
