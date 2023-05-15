@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from './student.entity';
 import { Repository } from 'typeorm';
-import { Mutation } from '@nestjs/graphql';
-import { StudentType } from './student.type';
+import { CreateStudentInput } from './create-student.input';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
@@ -11,13 +10,15 @@ export class StudentService {
   //inject the database repository
   constructor(@InjectRepository(Student) private studentRepository: Repository<Student>) {}
 
-//   @Mutation((returns) => StudentType)
-//   createStudent(fname, lname): Promise<Student> {
-//     const student = this.studentRepository.create({
-//       id: uuid(),
-//       fname,
-//       lname,
-//     });
-//     return this.studentRepository.save(student);
-//   }
+  
+  async createStudent(createStudentInput: CreateStudentInput): Promise<Student> {
+    const { fname, lname } = createStudentInput;
+    const student = this.studentRepository.create({
+      id: uuid(),
+      fname,
+      lname,
+    })
+    return this.studentRepository.save(student);
+  }
+
 }
