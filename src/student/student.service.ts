@@ -8,16 +8,19 @@ import { v4 as uuid } from 'uuid';
 @Injectable()
 export class StudentService {
   //inject the database repository
-  constructor(@InjectRepository(Student) private studentRepository: Repository<Student>) {}
+  constructor(
+    @InjectRepository(Student) private studentRepository: Repository<Student>,
+  ) {}
 
-  
-  async createStudent(createStudentInput: CreateStudentInput): Promise<Student> {
+  async createStudent(
+    createStudentInput: CreateStudentInput,
+  ): Promise<Student> {
     const { fname, lname } = createStudentInput;
     const student = this.studentRepository.create({
       id: uuid(),
       fname,
       lname,
-    })
+    });
     return this.studentRepository.save(student);
   }
 
@@ -25,4 +28,7 @@ export class StudentService {
     return this.studentRepository.find();
   }
 
+  async getStudentById(id: string): Promise<Student> {
+    return this.studentRepository.findOne({ where: { id: id } });
+  }
 }
