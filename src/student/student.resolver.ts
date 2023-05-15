@@ -22,13 +22,9 @@ export class StudentResolver {
     return this.studentService.createStudent(createStudentInput);
   }
 
-  // @Mutation((returns) => StudentType)
-  // createStudent(fname, lname): Promise<Student> {
-  //   const student = this.studentRepository.create({
-  //     id: uuid(),
-  //     fname,
-  //     lname,
-  //   });
-  //   return this.studentRepository.save(student);
-  // }
+  @Query((returns) => [StudentType])
+  getAllStudents() {
+    return this.studentService.getAllStudents();
+  }
+
 }
