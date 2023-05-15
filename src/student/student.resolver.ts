@@ -16,7 +16,7 @@ export class StudentResolver {
   constructor(private studentService: StudentService) {}
 
   @Mutation((returns) => StudentType)
-  createStudent(
+  async createStudent(
     @Args('createStudentInput') createStudentInput: CreateStudentInput,
   ) {
     return this.studentService.createStudent(createStudentInput);
